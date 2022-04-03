@@ -10,7 +10,7 @@ import { User } from "../user/user.interface";
     _id?: any;
     date: Date;
     etat: Boolean;
-    detail: DetailType;
+    detail: DetailType[];
     client: User;
     delivery_man: User;
     delivery_price: Number;

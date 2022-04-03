@@ -13,7 +13,7 @@ export const DetailTypeSchema = new mongoose.Schema({
 export const CommandeSchema = new mongoose.Schema({
   date: { type: Date, required: true },
   etat: { type: Boolean, required: true },
-  detail: { type: DetailTypeSchema, required: true },
+  detail: { type: [DetailTypeSchema], required: true },
   client: { type: userSchema, required: true },
   delivery_man: { type: userSchema },
   delivery_price: { type: Number, required: true },

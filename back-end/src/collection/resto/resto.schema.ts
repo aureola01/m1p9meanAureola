@@ -6,6 +6,7 @@ export interface RestoDocument extends Resto, mongoose.Document {}
 
 export const RestoSchema = new mongoose.Schema({
   user: { type: userSchema, required: true },
+  pourcentage: { type: Number, required: true },
   address: { type: String, required: true },
 });
 
