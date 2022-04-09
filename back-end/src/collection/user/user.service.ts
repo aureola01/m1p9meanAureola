@@ -1,4 +1,7 @@
-import { AuthenticationResponse, User } from "./user.interface";
+import { User } from "./user.interface";
+import { 
+  AuthenticationResponse
+} from "../../common/response/response.interface";
 import { userModel } from "./user.schema";
 import * as jwt from "jsonwebtoken";
 import { config } from "../../app/app.config";
@@ -12,7 +15,6 @@ class UserService {
   }
 
   async create(item: User): Promise<User> {
-    // delete item._id;
     return userModel.create(item);
   }
 
@@ -31,16 +33,28 @@ class UserService {
   }
 
   async signUp(item: User): Promise<AuthenticationResponse | null> {
-    delete item._id;
     const isExisting = (await userModel
       .findOne({ login: item.login })
       .exec()) as User;
+    let response = {
+      code: 500,
+      message: "Email déjà utilisé",
+      data:{
+        user: null,
+        token: ""
+      }
+    }
     if (!isExisting) {
       item.password = await bcrypt.hash(item.password, 10);
       const user = (await this.create(item)) as User;
       await this.sendSignupSuccessMail(user);
-      return this.getSignedUser(user);
+      const signedUser = this.getSignedUser(user);
+      response['code'] = 200;
+      response['message'] = "Votre compte a bien été créé avec succes";
+      response['data']['user'] = (await signedUser).user;
+      response['data']['token'] = (await signedUser).token;
     }
+    return response;
   }
 
   async getSignedUser(user: User) {
@@ -60,15 +74,29 @@ class UserService {
     const client = (await userModel
       .findOne({ login: item.login })
       .exec()) as User;
-    const user = {
-      _id: client._id,
-      login: client.login,
-      userType: client.userType,
-      firstName: client.firstName,
-      lastName: client.lastName,
-    };
-    // await this.sendSignupSuccessMail(createdClient);
-    return this.getSignedUser(user);
+    let response = {
+      code: 500,
+      message: "Email et/ou mot de passe incorrect",
+      data:{
+        user: null,
+        token: ""
+      }
+    }
+    if(this.comparePassword(item.password, client.password)){
+      const user = {
+        _id: client._id,
+        login: client.login,
+        userType: client.userType,
+        firstName: client.firstName,
+        lastName: client.lastName,
+      };
+      const signedUser = this.getSignedUser(user);
+      response['code'] = 200;
+      response['message'] = "Vous etes connecté avec succès";
+      response['data']['user'] = (await signedUser).user;
+      response['data']['token'] = (await signedUser).token;
+    }
+    return response;
   }
 
   async comparePassword(

@@ -15,7 +15,7 @@ class RestoRoute {
         this.router
         .route("/")
         .get(
-            passport.authenticate("jwt", { session: false }),
+            // passport.authenticate("jwt", { session: false }),
             restoController.getAll.bind(restoController),
         )
         .post(restoController.create.bind(restoController))
@@ -27,7 +27,7 @@ class RestoRoute {
         this.router
         .route("/:restoId")
         .get(
-            passport.authenticate("jwt", { session: false }),
+            // passport.authenticate("jwt", { session: false }),
             restoController.getById.bind(restoController),
         )
         .put(restoController.update.bind(restoController))

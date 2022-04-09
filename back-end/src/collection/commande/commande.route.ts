@@ -44,15 +44,15 @@ class CommandeRoute {
             commandeController.getByResto.bind(commandeController),
         );
         this.router.route("/delivery/:deliveryId").get(
-            passport.authenticate("jwt", { session: false }),
+            // passport.authenticate("jwt", { session: false }),
             commandeController.getByDeliveryMan.bind(commandeController),
         );
-        this.router.route("/delivery/:deliveryManId").get(
-          passport.authenticate("jwt", { session: false }),
+        this.router.route("/not_delivered/:deliveryManId").get(
+        //   passport.authenticate("jwt", { session: false }),
           commandeController.getOrderNotDelivered.bind(commandeController),
         );
         this.router.route("/deliver").put(
-          passport.authenticate("jwt", { session: false }),
+        //   passport.authenticate("jwt", { session: false }),
           commandeController.deliver.bind(commandeController),
         );
     }

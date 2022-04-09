@@ -2,7 +2,8 @@ import { NextFunction, Request, Response } from "express";
 import { ControllerRead } from "../../common/controller/controller-read.interface";
 import { ControllerWrite } from "../../common/controller/controller-write.interface";
 import { wrapToSendBackResponse } from "../../shared/wrap-to-send-back-response";
-import { AuthenticationResponse, User } from "./user.interface";
+import { User } from "./user.interface";
+import { AuthenticationResponse } from "../../common/response/response.interface";
 import { userService } from "./user.service";
 
 class UserController implements ControllerRead, ControllerWrite {

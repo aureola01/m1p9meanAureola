@@ -32,9 +32,9 @@ class CommandeService {
     async getOrderNotDelivered(id: string): Promise<Commande[] | null> {
         return CommandeModel.find({"delivery_man._id":id, "etat": false}).exec();
     }
-    async deliver(item: Commande): Promise<Commande | null> {
-        return CommandeModel
-          .findByIdAndUpdate(item._id, item, { new: true })
+    async deliver(id: String): Promise<Commande | null> {
+        return CommandeModel 
+          .findByIdAndUpdate(id, {"etat":true}, { new: true })
           .exec();
     }
 }
