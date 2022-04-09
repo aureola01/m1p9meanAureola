@@ -5,6 +5,8 @@
 export const environment = {
   production: false
 };
+// export const base_url = 'https://9nya8sarm1.execute-api.eu-west-1.amazonaws.com/Prod/';
+export const base_url = 'http://localhost:3000/api/mean';
 
 /*
  * For easier debugging in development mode, you can import the following file
