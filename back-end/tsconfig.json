@@ -1,10 +1,12 @@
 {
     "compilerOptions": {
       "target": "es6",
-      "module": "commonjs",
+      // "module": "commonjs",
+      "module": "ESNEXT",
       "outDir": "dist",
       "sourceMap": true,
-      "esModuleInterop": true
+      "esModuleInterop": true,
+      "moduleResolution": "node"
     },
     "include": ["src/**/*.ts"],
     "exclude": ["node_modules", ".vscode"]
