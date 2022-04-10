@@ -1,5 +1,5 @@
 {
-  "name": "nodejs-ekaly",
+  "name": "back-end",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -8,7 +8,6 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint -c .eslintrc.js --ext .ts src"
   },
-  "type":"module",
   "compilerOptions": {
     "module": "CommonJS"
   },
@@ -27,6 +26,7 @@
     "mongoose": "^6.2.8",
     "node-fetch": "^2.6.7",
     "nodemailer": "^6.7.3",
+    "nodemon": "^7.24.0",
     "passport": "^0.5.2",
     "passport-jwt": "^4.0.0",
     "passport-local": "^1.0.0",
