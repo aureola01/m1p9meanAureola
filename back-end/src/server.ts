@@ -1,9 +1,9 @@
-const app = require("./app/app");
-const config = require("./app/app.config");
-const database = require("./app/app.database");
+import { app } from "./app/app";
+import { config } from "./app/app.config";
+import { database } from "./app/app.database";
 
 console.log("Starting application ...");
 
-database.database.connect(async () => {
-  const srv = app.app.init(config.config.server.port);
+database.connect(async () => {
+  const srv = app.init(config.server.port);
 });
