@@ -15,7 +15,7 @@ class DishRoute {
         this.router
         .route("/")
         .get(
-            passport.authenticate("jwt", { session: false }),
+            // passport.authenticate("jwt", { session: false }),
             dishController.getAll.bind(dishController),
         )
         .post(dishController.create.bind(dishController))

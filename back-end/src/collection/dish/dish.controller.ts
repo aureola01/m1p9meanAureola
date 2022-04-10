@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import { ControllerRead } from "../../common/controller/controller-read.interface";
 import { ControllerWrite } from "../../common/controller/controller-write.interface";
+import { Dishes } from "../../common/response/response.interface";
 import { wrapToSendBackResponse } from "../../shared/wrap-to-send-back-response";
 import { DishType } from "./dish.interface";
 import { dishService } from "./dish.service";
@@ -8,7 +9,7 @@ import { dishService } from "./dish.service";
 class DishController implements ControllerRead, ControllerWrite {
 
     getAll(req: Request, res: Response, next: NextFunction): void {
-        wrapToSendBackResponse<DishType[] | null>(
+        wrapToSendBackResponse<Dishes | null>(
           dishService.getAll(),
           res,
           next,
