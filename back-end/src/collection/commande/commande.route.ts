@@ -1,5 +1,5 @@
 import { Router } from "express";
-import * as passport from "passport";
+import passport from "passport";
 import { commandeController } from "./commande.controller";
 
 class CommandeRoute {

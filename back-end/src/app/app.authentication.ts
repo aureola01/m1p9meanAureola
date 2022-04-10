@@ -1,5 +1,5 @@
 import { Request } from "express";
-import * as passport from "passport";
+import passport from "passport";
 import { ExtractJwt, Strategy as JwtStrategy } from "passport-jwt";
 import { Strategy as LocalStrategy } from "passport-local";
 import { config } from "../app/app.config";

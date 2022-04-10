@@ -1,5 +1,5 @@
-import * as express from "express";
-import * as cors from "cors";
+import express from "express";
+import cors from "cors";
 import { Server } from "http";
 import passport from "./app.authentication";
 import * as bodyParser from "body-parser";
