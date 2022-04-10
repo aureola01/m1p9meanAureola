@@ -1,10 +1,10 @@
 // @ts-ignore
-import { app } from "./app/app";
-import { config } from "./app/app.config";
-import { database } from "./app/app.database";
+import * as app from "./app/app";
+import * as config from "./app/app.config";
+import * as database from "./app/app.database";
 
 console.log("Starting application ...");
 
-database.connect(async () => {
-  const srv = app.init(config.server.port);
+database.database.connect(async () => {
+  const srv = app.app.init(config.config.server.port);
 });
