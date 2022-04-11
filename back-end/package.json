@@ -5,7 +5,7 @@
   "main": "index.js",
   "ts-node": {
     "compilerOptions": {
-      "module": "commonjs"
+      "module": "CommonJs"
     }
   },
   "scripts": {
