@@ -1,13 +1,11 @@
-var express = require("express");
-// import * as express from "express";
-// import cors from "cors";
-var cors = require("cors");
+import express from "express";
+import cors from "cors";
 import { Server } from "http";
 import passport from "./app.authentication";
 import * as bodyParser from "body-parser";
 import { appRoutes } from "./app.routes";
-class App {
-  private readonly app;
+export class App {
+  private readonly app: express.Application;
 
   constructor() {
     this.app = express();
@@ -32,9 +30,8 @@ class App {
       optionsSuccessStatus: 204,
     };
     this.app.use(cors(corsOptions));
-    this.app.use("/api/mean", appRoutes);
+    this.app.use("/api/v1", appRoutes);
   }
 }
 
-// export const app = new App();
-module.exports = new App();
+export const app = new App();

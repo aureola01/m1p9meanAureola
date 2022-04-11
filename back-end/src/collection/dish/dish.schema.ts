@@ -7,13 +7,13 @@ export interface DishDocument extends DishType, mongoose.Document {}
 export const DishTypeSchema = new mongoose.Schema({
   resto: { type: RestoSchema, required: true },
   code: { type: String, required: true },
-  image: { type: String, required: true },
+  description: { type: String, required: true },
+  image: { type: String, required: false },
   name: { type: String, required: true },
   pR: { type: Number, required: true },
   pV: { type: Number, required: true },
   visibility: { type: Boolean, required: true },
 });
-
 
 export const DishModel = mongoose.model<DishDocument>(
   "Dish",

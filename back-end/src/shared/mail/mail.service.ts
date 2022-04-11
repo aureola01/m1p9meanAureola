@@ -1,6 +1,6 @@
 import * as nodemailer from "nodemailer";
-// import { config } from "../../app/app.config";
-var config = require("../../app/app.config");
+import { config } from "../../app/app.config";
+
 export interface MailPayload {
   to: String;
   subject: String;

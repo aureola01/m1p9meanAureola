@@ -2,8 +2,7 @@ import { NextFunction, Request, Response } from "express";
 import { ControllerRead } from "../../common/controller/controller-read.interface";
 import { ControllerWrite } from "../../common/controller/controller-write.interface";
 import { wrapToSendBackResponse } from "../../shared/wrap-to-send-back-response";
-import { User } from "./user.interface";
-import { AuthenticationResponse } from "../../common/response/response.interface";
+import { AuthenticationResponse, User } from "./user.interface";
 import { userService } from "./user.service";
 
 class UserController implements ControllerRead, ControllerWrite {
@@ -58,6 +57,30 @@ class UserController implements ControllerRead, ControllerWrite {
   update(req: Request, res: Response, next: NextFunction): void {
     wrapToSendBackResponse<User | null>(
       userService.update(req.body),
+      res,
+      next,
+    );
+  }
+
+  specificUpdate(
+    req: Request,
+    res: Response,
+    next: NextFunction,
+  ): void {
+    wrapToSendBackResponse<User | null>(
+      userService.specificUpdate(req.body),
+      res,
+      next,
+    );
+  }
+
+  getDeliverers(
+    req: Request,
+    res: Response,
+    next: NextFunction,
+  ): void {
+    wrapToSendBackResponse<User[] | null>(
+      userService.getDeliverers(),
       res,
       next,
     );

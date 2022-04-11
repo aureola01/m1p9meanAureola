@@ -11,10 +11,9 @@ class UserRouter {
   }
 
   private init() {
-    this.router.route("/profile/:userId").put(
-      // passport.authenticate("jwt", { session: false }),
-      userController.update.bind(userController),
-    );
+    this.router
+      .route("/profile/:userId")
+      .put(userController.update.bind(userController));
 
     this.router
       .route("/signup")
@@ -28,15 +27,27 @@ class UserRouter {
       );
 
     this.router
+      .route("/deliverer")
+      .get(
+        passport.authenticate("jwt", { session: false }),
+        userController.getDeliverers.bind(userController),
+      );
+
+    this.router
       .route("/")
       .get(
-        // passport.authenticate("jwt", { session: false }),
+        passport.authenticate("jwt", { session: false }),
         userController.getAll.bind(userController),
       )
-      .put(userController.update.bind(userController))
-      .delete(
-        // passport.authenticate("jwt", { session: false }),
-        userController.delete.bind(userController),
+      .put(
+        passport.authenticate("jwt", { session: false }),
+        userController.update.bind(userController),
+      );
+    this.router
+      .route("/specificUpdate")
+      .put(
+        passport.authenticate("jwt", { session: false }),
+        userController.specificUpdate.bind(userController),
       );
     this.router
       .route("/:userId")
@@ -44,9 +55,8 @@ class UserRouter {
         passport.authenticate("jwt", { session: false }),
         userController.getById.bind(userController),
       )
-      .put(userController.update.bind(userController))
       .delete(
-        // passport.authenticate("jwt", { session: false }),
+        passport.authenticate("jwt", { session: false }),
         userController.delete.bind(userController),
       );
   }

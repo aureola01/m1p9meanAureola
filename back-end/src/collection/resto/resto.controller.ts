@@ -6,15 +6,14 @@ import { Resto } from "./resto.interface";
 import { restoService } from "./resto.service";
 
 class RestoController implements ControllerRead, ControllerWrite {
-
-    getAll(req: Request, res: Response, next: NextFunction): void {
-        wrapToSendBackResponse<Resto[] | null>(
-          restoService.getAll(),
-          res,
-          next,
-        );
-    }
-    getById(req: Request, res: Response, next: NextFunction): void {
+  getAll(req: Request, res: Response, next: NextFunction): void {
+    wrapToSendBackResponse<Resto[] | null>(
+      restoService.getAll(),
+      res,
+      next,
+    );
+  }
+  getById(req: Request, res: Response, next: NextFunction): void {
     wrapToSendBackResponse<Resto | null>(
       restoService.getById(req.params.restoId),
       res,
@@ -39,6 +38,14 @@ class RestoController implements ControllerRead, ControllerWrite {
   update(req: Request, res: Response, next: NextFunction): void {
     wrapToSendBackResponse<Resto | null>(
       restoService.update(req.body),
+      res,
+      next,
+    );
+  }
+
+  getByUser(req: Request, res: Response, next: NextFunction): void {
+    wrapToSendBackResponse<Resto | null>(
+      restoService.getByUser(req.params.userId),
       res,
       next,
     );

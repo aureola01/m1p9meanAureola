@@ -10,3 +10,8 @@ export interface User {
   login?: String;
   password?: String;
 }
+
+export interface AuthenticationResponse {
+  user: User;
+  token: string;
+}

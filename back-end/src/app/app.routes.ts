@@ -16,9 +16,9 @@ class AppRouter {
     );
 
     this.router.use("/user", userRoutes);
-    this.router.use("/commande", commandeRoutes);
     this.router.use("/resto", restoRoutes);
     this.router.use("/dish", dishRoutes);
+    this.router.use("/order", commandeRoutes);
   }
 }
 

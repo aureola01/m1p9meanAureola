@@ -1,9 +1,7 @@
-import { User } from "./user.interface";
-import { AuthenticationResponse } from "../../common/response/response.interface";
+import { AuthenticationResponse, User } from "./user.interface";
 import { userModel } from "./user.schema";
 import * as jwt from "jsonwebtoken";
-// import { config } from "../../app/app.config";
-var config = require("../../app/app.config");
+import { config } from "../../app/app.config";
 import * as bcrypt from "bcrypt";
 import { mailService } from "../../shared/mail/mail.service";
 import { mailRenderService } from "../../shared/mail/mail-render.service";
@@ -14,6 +12,7 @@ class UserService {
   }
 
   async create(item: User): Promise<User> {
+    // delete item._id;
     return userModel.create(item);
   }
 
@@ -31,30 +30,37 @@ class UserService {
       .exec();
   }
 
+  async specificUpdate(item: User): Promise<User | null> {
+    return userModel
+      .findByIdAndUpdate(
+        item._id,
+        {
+          $set: {
+            firstName: item.firstName,
+            lastName: item.lastName,
+            login: item.login,
+          },
+        },
+        { new: true },
+      )
+      .exec();
+  }
+
+  async getDeliverers(): Promise<User[] | null> {
+    return userModel.find({ "userType.name": "Livreur" }).exec();
+  }
+
   async signUp(item: User): Promise<AuthenticationResponse | null> {
+    delete item._id;
     const isExisting = (await userModel
       .findOne({ login: item.login })
       .exec()) as User;
-    let response = {
-      code: 500,
-      message: "Email déjà utilisé",
-      data: {
-        user: null,
-        token: "",
-      },
-    };
-    if (!isExisting) {
+    if (!isExisting && item.login.includes("@")) {
       item.password = await bcrypt.hash(item.password, 10);
       const user = (await this.create(item)) as User;
       await this.sendSignupSuccessMail(user);
-      const signedUser = this.getSignedUser(user);
-      response["code"] = 200;
-      response["message"] =
-        "Votre compte a bien été créé avec succes";
-      response["data"]["user"] = (await signedUser).user;
-      response["data"]["token"] = (await signedUser).token;
+      return this.getSignedUser(user);
     }
-    return response;
   }
 
   async getSignedUser(user: User) {
@@ -74,29 +80,15 @@ class UserService {
     const client = (await userModel
       .findOne({ login: item.login })
       .exec()) as User;
-    let response = {
-      code: 500,
-      message: "Email et/ou mot de passe incorrect",
-      data: {
-        user: null,
-        token: "",
-      },
+    const user = {
+      _id: client._id,
+      login: client.login,
+      userType: client.userType,
+      firstName: client.firstName,
+      lastName: client.lastName,
     };
-    if (this.comparePassword(item.password, client.password)) {
-      const user = {
-        _id: client._id,
-        login: client.login,
-        userType: client.userType,
-        firstName: client.firstName,
-        lastName: client.lastName,
-      };
-      const signedUser = this.getSignedUser(user);
-      response["code"] = 200;
-      response["message"] = "Vous etes connecté avec succès";
-      response["data"]["user"] = (await signedUser).user;
-      response["data"]["token"] = (await signedUser).token;
-    }
-    return response;
+    // await this.sendSignupSuccessMail(createdClient);
+    return this.getSignedUser(user);
   }
 
   async comparePassword(

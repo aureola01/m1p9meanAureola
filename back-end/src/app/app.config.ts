@@ -3,7 +3,7 @@ import * as env from "env-var";
 
 dotenv.config({ path: ".env" });
 
-const config = {
+export const config = {
   server: {
     port: env.get("NODE_PORT").required().asIntPositive(),
   },
@@ -20,5 +20,9 @@ const config = {
     user: env.get("SMTP_USER").required().asString(),
     password: env.get("SMTP_PASSWORD").required().asString(),
   },
+  cloudinary: {
+    name: env.get("CLOUD_NAME").required().asString(),
+    api_key: env.get("API_KEY").required().asString(),
+    api_secret: env.get("API_SECRET").required().asString(),
+  },
 };
-module.exports = config;

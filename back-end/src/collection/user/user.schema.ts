@@ -12,7 +12,7 @@ export const userSchema = new mongoose.Schema({
   firstName: { type: String, required: false },
   lastName: { type: String, required: false },
   login: { type: String, required: true },
-  password: { type: String, required: true },
+  password: { type: String, required: false },
 });
 
 export const userModel = mongoose.model<UserDocument>(
