@@ -21,6 +21,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import {MatButtonModule} from '@angular/material/button';
 import { CommanderComponent } from './client/commander/commander.component';
+import {MatFormFieldModule} from '@angular/material/form-field';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { CommanderComponent } from './client/commander/commander.component';
     BrowserAnimationsModule,
     MatPaginatorModule,
     MatSortModule,
-    MatButtonModule
+    MatButtonModule,
+    MatFormFieldModule
   ],
   providers: [
     {provide: APP_BASE_HREF, useValue: '/'}
