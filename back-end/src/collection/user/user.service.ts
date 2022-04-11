@@ -1,10 +1,9 @@
 import { User } from "./user.interface";
-import { 
-  AuthenticationResponse
-} from "../../common/response/response.interface";
+import { AuthenticationResponse } from "../../common/response/response.interface";
 import { userModel } from "./user.schema";
 import * as jwt from "jsonwebtoken";
-import { config } from "../../app/app.config";
+// import { config } from "../../app/app.config";
+var config = require("../../app/app.config");
 import * as bcrypt from "bcrypt";
 import { mailService } from "../../shared/mail/mail.service";
 import { mailRenderService } from "../../shared/mail/mail-render.service";
@@ -39,20 +38,21 @@ class UserService {
     let response = {
       code: 500,
       message: "Email déjà utilisé",
-      data:{
+      data: {
         user: null,
-        token: ""
-      }
-    }
+        token: "",
+      },
+    };
     if (!isExisting) {
       item.password = await bcrypt.hash(item.password, 10);
       const user = (await this.create(item)) as User;
       await this.sendSignupSuccessMail(user);
       const signedUser = this.getSignedUser(user);
-      response['code'] = 200;
-      response['message'] = "Votre compte a bien été créé avec succes";
-      response['data']['user'] = (await signedUser).user;
-      response['data']['token'] = (await signedUser).token;
+      response["code"] = 200;
+      response["message"] =
+        "Votre compte a bien été créé avec succes";
+      response["data"]["user"] = (await signedUser).user;
+      response["data"]["token"] = (await signedUser).token;
     }
     return response;
   }
@@ -77,12 +77,12 @@ class UserService {
     let response = {
       code: 500,
       message: "Email et/ou mot de passe incorrect",
-      data:{
+      data: {
         user: null,
-        token: ""
-      }
-    }
-    if(this.comparePassword(item.password, client.password)){
+        token: "",
+      },
+    };
+    if (this.comparePassword(item.password, client.password)) {
       const user = {
         _id: client._id,
         login: client.login,
@@ -91,10 +91,10 @@ class UserService {
         lastName: client.lastName,
       };
       const signedUser = this.getSignedUser(user);
-      response['code'] = 200;
-      response['message'] = "Vous etes connecté avec succès";
-      response['data']['user'] = (await signedUser).user;
-      response['data']['token'] = (await signedUser).token;
+      response["code"] = 200;
+      response["message"] = "Vous etes connecté avec succès";
+      response["data"]["user"] = (await signedUser).user;
+      response["data"]["token"] = (await signedUser).token;
     }
     return response;
   }

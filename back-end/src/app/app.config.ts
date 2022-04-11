@@ -3,7 +3,7 @@ import * as env from "env-var";
 
 dotenv.config({ path: ".env" });
 
-export const config = {
+const config = {
   server: {
     port: env.get("NODE_PORT").required().asIntPositive(),
   },
@@ -21,3 +21,4 @@ export const config = {
     password: env.get("SMTP_PASSWORD").required().asString(),
   },
 };
+module.exports = config;

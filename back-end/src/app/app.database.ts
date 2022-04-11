@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
-import { config } from "./app.config";
+var config = require("./app.config");
+// import { config } from "./app.config";
 
 exports.Database = async function connect(cb: () => void) {
   const connexionString = config.mongodb.dbURI;

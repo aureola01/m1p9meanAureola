@@ -4,7 +4,7 @@ import { Server } from "http";
 import passport from "./app.authentication";
 import * as bodyParser from "body-parser";
 import { appRoutes } from "./app.routes";
-export class App {
+class App {
   private readonly app: express.Application;
 
   constructor() {
@@ -34,4 +34,5 @@ export class App {
   }
 }
 
-export const app = new App();
+// export const app = new App();
+module.exports = new App();
