@@ -1,6 +1,7 @@
 var express = require("express");
 // import * as express from "express";
-import cors from "cors";
+// import cors from "cors";
+var cors = require("cors");
 import { Server } from "http";
 import passport from "./app.authentication";
 import * as bodyParser from "body-parser";
