@@ -1,7 +1,9 @@
 <app-header></app-header>
 <div style="padding-left:18%; padding-top:3%; padding-right:10%">
     <div> <h1 style="text-align:center; color:grey; font-weight:bold">Listes des Plats</h1> </div>
-
+    <div class="text-center panier">
+        <button routerLink = "/commander" type="submit" class="btn btn-primary btn-block">Voir panier</button>
+    </div>
     <table mat-table [dataSource]="allDishes" matSort class="mat-elevation-z8">
       <ng-container matColumnDef="Nom">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Nom </th>
@@ -29,9 +31,15 @@
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Restaurant </th>
         <td mat-cell *matCellDef="let dish"> {{dish.resto.user.firstName}}</td>
       </ng-container>
+      <ng-container matColumnDef="Quantite">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> qte </th>
+        <td mat-cell *matCellDef="let dish"> 
+            <input class="dropdown" matInput type="number" [(ngModel)]="quantite" [ngModelOptions]="{standalone: true}" placeholder="0" min="0">
+        </td>
+      </ng-container>
       <ng-container matColumnDef="Option">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Commander </th>
-        <td mat-cell *matCellDef="let dish"> <button routerLink="/commander" mat-button color="primary">commander</button> </td>
+        <td mat-cell *matCellDef="let dish"> <button (click) = "commander(dish)" mat-button color="primary">commander</button> </td>
       </ng-container>
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>

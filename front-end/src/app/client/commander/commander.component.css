@@ -1,0 +1,19 @@
+.dropdown{
+    width: 20px;
+}
+.prixTotal{
+    margin-top: 5%;
+    font-weight: bold;
+    font-size: 14px;
+}
+.valider{
+    margin-left: 40%;
+    margin-right: 40%;
+}
+.carte{
+    margin-top: 5%;
+}
+.input{
+    margin-left: 5%;
+    margin-right: 5%;
+}

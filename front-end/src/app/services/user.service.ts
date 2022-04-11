@@ -15,4 +15,11 @@ export class UserService {
   signup(user:any){
     return this.http.post(base_url + '/user/sign_up', user);
   }
+  getUserById(){
+    const options = this.toolServ.formOption(true, sessionStorage.getItem("session_token"));
+    console.log(sessionStorage.getItem("id_user"));
+    let url = base_url+'/user/'+sessionStorage.getItem("id_user");
+    console.log(url);
+    return this.http.get(url, options);
+  }
 }

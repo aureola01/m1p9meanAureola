@@ -29,6 +29,8 @@ export class SignupComponent implements OnInit {
     const onSuccess = (response: any) => {
       console.log(response['data']);
       sessionStorage.setItem("session_token", response.data['token']);
+      sessionStorage.setItem("id_user", response.data['user']['_id']);
+        console.log(sessionStorage.getItem("id_user"));
       console.log(sessionStorage.getItem("session_token"));
       this.success_message = response['message'];
       if(response['data']['user']['userType']['name'] == "client"){

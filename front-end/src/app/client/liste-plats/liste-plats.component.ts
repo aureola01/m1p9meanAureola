@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { ToolService } from 'src/app/services/tool.service';
 import { DishService } from 'src/app/services/dish.service';
+import { CommandeService } from 'src/app/services/commande.service';
 
 @Component({
   selector: 'app-liste-plats',
@@ -19,18 +20,38 @@ export class ListePlatsComponent implements OnInit {
   allDishes: any = [];
   data_length = 0;
   array: any;
-  displayedColumns: string[] = ['Nom', 'Code', 'Description', 'Prix', 'Image', 'Restaurant', 'Option'];
+  displayedColumns: string[] = ['Nom', 'Code', 'Description', 'Prix', 'Image', 'Restaurant', 'Quantite', 'Option'];
   pageSize = 10;
   currentPage = 0;
   totalSize = 0;
+  //commander
+  quantite = 0;
+  panier: any =[];
+  keys: string[] = [];
 
-  constructor(public activatedRoute : ActivatedRoute, private dishServ : DishService, private toolServ : ToolService, private route : Router) { }
+  constructor(public activatedRoute : ActivatedRoute, private dishServ : DishService, private comServ: CommandeService, private toolServ : ToolService, private route : Router) { }
 
   ngOnInit(): void {
     console.log(sessionStorage.getItem("session_token"));
+    // this.comServ.removePanier();
     if(sessionStorage.getItem("session_token")){
      this.getAllDishes();
+     this.panier = this.comServ.getPanier();
     }
+  }
+
+  commander(dish:any){
+    console.log(dish);
+    let key = dish._id;
+    this.keys.push(key);
+    let dishtype = {
+      dish: dish,
+      qty: this.quantite,
+      totalPriceRow: this.quantite * dish.pV,
+      benefitsRow: (this.quantite * dish.pV) -(this.quantite * dish.pR),
+    }
+    localStorage.setItem(key, JSON.stringify(dishtype));
+    console.log("STORAGELOCALA"+localStorage.getItem(key));
   }
 
   getAllDishes(){
