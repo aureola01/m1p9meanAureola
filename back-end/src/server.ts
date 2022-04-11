@@ -1,6 +1,6 @@
 // @ts-ignore
 // import { app } from "./app/app";
-var app = require("./app/app");
+var app = require("./app/app.ts");
 // import { config } from "./app/app.config";
 var config = require("./app/app.config");
 // import { database } from "./app/app.database";
