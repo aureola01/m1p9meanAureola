@@ -1,1 +1,48 @@
-<p>liste-plats works!</p>
+<app-header></app-header>
+<div style="padding-left:18%; padding-top:3%; padding-right:10%">
+    <div> <h1 style="text-align:center; color:grey; font-weight:bold">Listes des Plats</h1> </div>
+
+    <table mat-table [dataSource]="allDishes" matSort class="mat-elevation-z8">
+      <ng-container matColumnDef="Nom">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Nom </th>
+        <td mat-cell *matCellDef="let dish"> {{dish.name}} </td>
+      </ng-container>
+      <ng-container matColumnDef="Code">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Code </th>
+        <td mat-cell *matCellDef="let dish"> {{dish.code}} </td>
+      </ng-container>
+      <ng-container matColumnDef="Description">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Description </th>
+        <td mat-cell *matCellDef="let dish"> {{dish.description}} </td>
+      </ng-container>
+      <ng-container matColumnDef="Prix">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Prix </th>
+        <td mat-cell *matCellDef="let dish"> {{dish.pV}} </td>
+      </ng-container>
+      <ng-container matColumnDef="Image">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Image </th>
+        <td mat-cell *matCellDef="let dish">
+            <img mat-card-image class = "sary" src="{{dish.image}}" alt="Photo of a Shiba Inu"> 
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="Restaurant">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Restaurant </th>
+        <td mat-cell *matCellDef="let dish"> {{dish.resto.user.firstName}}</td>
+      </ng-container>
+      <ng-container matColumnDef="Option">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Commander </th>
+        <td mat-cell *matCellDef="let dish"> <button routerLink="/commander" mat-button color="primary">commander</button> </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+  <!-- pagination -->
+  <mat-paginator 
+    [length]="data_length" 
+    [pageSize]="pageSize"
+    [pageSizeOptions]="[5, 10]"
+    [pageIndex]="currentPage" 
+    (page)=" handlePage($event)"
+    showFirstLastButtons>
+  </mat-paginator>  
+</div>

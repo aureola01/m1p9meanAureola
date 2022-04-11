@@ -23,18 +23,12 @@ export class LoginComponent implements OnInit {
   login(){
     const onSuccess = (response: any) => {
       console.log(response.data);
-      if (response.data['code'] == 200) {
-        console.log("200"+response.data['message']);
-        sessionStorage.setItem("session_token", response.data['data']['token']);
+        sessionStorage.setItem("session_token", response.data['token']);
         console.log(sessionStorage.getItem("session_token"));
-        this.success_message = response.data['message'];
-        if(response.data['data']['user']['userType']['name'] == "client"){
+        this.success_message = response['message'];
+        if(response['data']['user']['userType']['name'] == "client"){
           this.route.navigate(['/liste-plats']);
         }
-      } else {
-        console.log("500"+response.data['message']);
-        this.error_message = response.data['message'];
-      }
     }
     const onError = (response: any) => {
       console.log("onError");

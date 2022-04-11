@@ -19,6 +19,8 @@ import { MatTableModule } from '@angular/material/table';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
+import {MatButtonModule} from '@angular/material/button';
+import { CommanderComponent } from './client/commander/commander.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +31,8 @@ import { MatSortModule } from '@angular/material/sort';
     SignupComponent,
     NavbarComponent,
     CommandeEnCoursComponent,
-    ListePlatsComponent
+    ListePlatsComponent,
+    CommanderComponent
   ],
   imports: [
     BrowserModule,
@@ -39,7 +42,8 @@ import { MatSortModule } from '@angular/material/sort';
     MatTableModule,
     BrowserAnimationsModule,
     MatPaginatorModule,
-    MatSortModule
+    MatSortModule,
+    MatButtonModule
   ],
   providers: [
     {provide: APP_BASE_HREF, useValue: '/'}

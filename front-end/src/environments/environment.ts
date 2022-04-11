@@ -5,8 +5,8 @@
 export const environment = {
   production: false
 };
-// export const base_url = 'https://9nya8sarm1.execute-api.eu-west-1.amazonaws.com/Prod/';
-export const base_url = 'https://m1p9mean-aureola.herokuapp.com/api/mean';
+// export const base_url = 'https://m1p9mean-aureola.herokuapp.com/api/mean';
+export const base_url = 'https://nodepmeandera.herokuapp.com/api/v1';
 
 /*
  * For easier debugging in development mode, you can import the following file

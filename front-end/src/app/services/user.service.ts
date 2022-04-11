@@ -12,4 +12,7 @@ export class UserService {
   login(user:any){
     return this.http.post(base_url + '/user/login', user);
   }
+  signup(user:any){
+    return this.http.post(base_url + '/user/sign_up', user);
+  }
 }

@@ -10,27 +10,29 @@
                                 <form action="index.html">
                                     <div class="form-group">
                                         <label class="mb-1"><strong>Nom</strong></label>
-                                        <input type="text" class="form-control" placeholder="nom">
+                                        <input type="text" class="form-control" placeholder="nom" [(ngModel)]="user.lastName" [ngModelOptions]="{standalone: true}">
                                     </div>
                                     <div class="form-group">
                                         <label class="mb-1"><strong>Prénom</strong></label>
-                                        <input type="text" class="form-control" placeholder="prénom">
+                                        <input type="text" class="form-control" placeholder="prénom" [(ngModel)]="user.firstName" [ngModelOptions]="{standalone: true}">
                                     </div>
                                     <div class="form-group">
                                         <label class="mb-1"><strong>Email</strong></label>
-                                        <input type="email" class="form-control" placeholder="hello@example.com">
+                                        <input type="email" class="form-control" placeholder="hello@example.com" [(ngModel)]="user.login" [ngModelOptions]="{standalone: true}">
                                     </div>
                                     <div class="form-group">
                                         <label class="mb-1"><strong>Mot de passe</strong></label>
-                                        <input type="password" class="form-control">
+                                        <input type="password" class="form-control" [(ngModel)]="user.password" [ngModelOptions]="{standalone: true}">
                                     </div>
                                     <div class="text-center mt-4">
-                                        <button type="submit" class="btn btn-primary btn-block">S'inscrire</button>
+                                        <button (click) = "signup()" type="submit" class="btn btn-primary btn-block">S'inscrire</button>
                                     </div>
                                 </form>
                                 <div class="new-account mt-3">
                                     <p>Avez-vous déjà un compte? <a class="text-primary" routerLink="/login">Se connecter</a></p>
                                 </div>
+                                <p>{{success_message}}</p>
+                                <p>{{error_message}}</p>
                             </div>
                         </div>
                     </div>

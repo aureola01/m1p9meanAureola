@@ -10,9 +10,10 @@ export class DishService {
 
   constructor(private http : HttpClient, private toolServ : ToolService) { }
   getAllDishes(){
-    return this.http.get(base_url + '/dish');
+    const options = this.toolServ.formOption(true, sessionStorage.getItem("session_token"));
+    return this.http.get(base_url + '/dish', options);
   }
-  create_dish(resto:any){
-    // return this.http.post(base_url + '/dish/');
+  create_dish(dish:any){
+    return this.http.post(base_url + '/dish', dish);
   }
 }
