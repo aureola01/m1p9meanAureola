@@ -1,11 +1,12 @@
-import * as express from "express";
+var express = require("express");
+// import * as express from "express";
 import cors from "cors";
 import { Server } from "http";
 import passport from "./app.authentication";
 import * as bodyParser from "body-parser";
 import { appRoutes } from "./app.routes";
 class App {
-  private readonly app: express.Application;
+  private readonly app;
 
   constructor() {
     this.app = express();
